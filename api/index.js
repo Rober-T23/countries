@@ -18,11 +18,12 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const {getCountrieApi}=require('./src/servises/connectionApi.js')
 const { conn } = require('./src/db.js');
-
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(3100,async() => {
+    console.log('listening at 3100'); // eslint-disable-line no-console
+    await getCountrieApi();
   });
 });
