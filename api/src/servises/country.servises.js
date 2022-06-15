@@ -17,7 +17,7 @@ module.exports = {
   
     getCountriesName: (req, res) =>{
         try{
-            let {nombre}= req.query
+            let nombre= req.params.nombre
         
       
         if(nombre){

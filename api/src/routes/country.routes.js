@@ -11,6 +11,6 @@ const router = Router();
 // Configurar los routers
 router.get('/', getCountries);
 router.get('/:idPais', getCountriesId)
-router.get('/name', getCountriesName)
+router.get('/nombre/:nombre', getCountriesName)
 
 module.exports = router;

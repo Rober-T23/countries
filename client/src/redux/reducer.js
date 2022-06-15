@@ -1,9 +1,10 @@
 //const action = require("./action.js");
 
-import { DELETE_COUNTRES , GET_COUNTRIS} from './action';
+import { DELETE_COUNTRES , GET_COUNTRIS, SET_CURRENPAGE} from './action';
 const iniciaState = {
   countris: [],
   tourist: [],
+  coutriPage: 1
 };
 function reducer(state = iniciaState, action) {
   switch (action.type) {
@@ -12,7 +13,11 @@ function reducer(state = iniciaState, action) {
         ...state,
         countris: action.payload
       }
-
+    case SET_CURRENPAGE:
+      return{
+        ...state,
+        coutriPage: action.payload
+      }
     case DELETE_COUNTRES:
       return {
         ...state,
