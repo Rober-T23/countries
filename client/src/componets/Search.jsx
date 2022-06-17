@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-
-function Search({onSearch}) {
+import {Link,Route} from 'react-router-dom'
+import Home from './Home.jsx'
+function Search() {
     const [countri, setCountri] = useState("");
+    const handleClick=({target})=>{
+      setCountri(target.value)
+    }
+    const handleSudme=(e)=>{
+      e.preventDefault();
+     
+    }
+   
      return(
-        <form onSubmit={(e) => {
-            e.preventDefault();
-            onSearch(countri);
-          }}>
+        <form onSubmit={handleSudme}>
             <input
               type="text"
               placeholder="Pais..."
               value={countri}
-              onChange={e => setCountri (e.target.value)}
+              onChange={handleClick}
             />
-            <input type="submit" value="Agregar" />
+
+            <Route path="/countri"><Home nombre={countri}/></Route>
           </form>
      )
 }

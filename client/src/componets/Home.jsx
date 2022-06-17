@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getAllCoutris} from '../redux/action'
 import  Paginado from './Paginado'
 
-function Home(){
+function Home({nombre}){
     const dispatch = useDispatch();
 
     const countri= useSelector(state=>state.countris)
@@ -13,26 +13,45 @@ function Home(){
     const ultimoInidice= currenPage*coutriPorPage;
     const primerIndice= ultimoInidice-coutriPorPage;
     const currentCountris=countri.slice(primerIndice,ultimoInidice)
-    console.log(currentCountris)
-    console.log(ultimoInidice,"   ",primerIndice)
-    console.log(currenPage)
+  
+    const countriData= countri.filter(e=> e.nombre.includes(nombre))
+    console.log(countriData)
+ if(!nombre){
+    return(
+        <div className="countris">
+            <Paginado coutriPorPage={coutriPorPage} totalCountri={countri.length} />
+             {
     
- return(
-    <div className="countris">
-        <Paginado coutriPorPage={coutriPorPage} totalCountri={countri.length} />
-         {
-
-         currentCountris&& currentCountris.map(e=>{ 
-                return(
-                    <div key={e.id}>
-                        <p>{e.nombre}</p>
-                        <img src={e.imagen} alt={e.nombre}/>
-                    </div>
-                )
-             })
-         }
-    </div>
- )
+             currentCountris&& currentCountris.map(e=>{ 
+                    return(
+                        <div key={e.id}>
+                            <p>{e.nombre}</p>
+                            <img src={e.imagen} alt={e.nombre}/>
+                        </div>
+                    )
+                 })
+             }
+        </div>
+     )
+ }else{
+    const current=countriData.slice(primerIndice,ultimoInidice)
+    return(
+        <div className="countris">
+            <Paginado coutriPorPage={coutriPorPage} totalCountri={countriData.length} />
+             {
+    
+    current&& current.map(e=>{ 
+                    return(
+                        <div key={e.id}>
+                            <p>{e.nombre}</p>
+                            <img src={e.imagen} alt={e.nombre}/>
+                        </div>
+                    )
+                 })
+             }
+        </div>
+     )
+ }
 
 }
 export default Home;
