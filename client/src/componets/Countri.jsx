@@ -1,38 +1,31 @@
-import {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {getAllCoutris} from '../redux/action'
-
+import {useParams}from 'react-router-dom'
+import {useSelector}from 'react-redux'
 function Countri(){
-   //  const dispatch = useDispatch();
-   //    const countri= useSelector(state=>state.countris)
-   // useEffect(()=>{ dispatch(getAllCoutris())},[dispatch])
-   // const countriData= countri.filter(e=> e.nombre.includes(nombre))
-
-   // if(countriData){
-   //    return (
-   //       <div className="countris">
-   //          {
-   //             countriData && countriData.map(e =>{
-   //                return(
-   //                   <div key={countriData.id}>
-   //                      <p>{countriData.nombre}</p>
-   //                      <img src={countriData.imagen} alt={countriData.nombre} />
-   
-   //                   </div>
-   //                )
-   //             }
+    let countris = useSelector(state=>state.countris)
+    let {id}=useParams()
+    let dataResuls= countris.filter(e=>e.id===id)
+    return(
+        <div className="countri">
+           {
+             dataResuls&& dataResuls.map(e => {
+                return (
+                    <div key={e.id}>
                         
-   //             )
-   
-   
-   //          }
-   //       </div>
-   //    )
-   // }else{
-   //    return(
-   //       <div>NO HAY DATA</div>
-   //    )
-   // }
+                        <img src={e.imagen} alt={e.nombre}/>
+                        <h1>{e.name}</h1>
+                        <p>{e.id}</p>
+                        <h2>{e.continente}</h2>
+                        <p>{e.capital}</p>
+                        <p>{e.poblacion}</p>
+                        <p>{e.subregion}</p>
+                        <p>{e.area}</p>
 
+
+                    </div>
+                )
+             })
+           }
+        </div>
+    )
 }
 export default Countri;

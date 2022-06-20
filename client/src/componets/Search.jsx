@@ -1,26 +1,32 @@
-import React, { useState } from "react";
-import {Link,Route} from 'react-router-dom'
-import Home from './Home.jsx'
+import React from "react";
+import {useDispatch,useSelector} from 'react-redux'
+// import Countris from './Countris.jsx'
+// import {Link,Route} from 'react-router-dom'
+import {getAllSearch} from '../redux/action.js'
 function Search() {
-    const [countri, setCountri] = useState("");
-    const handleClick=({target})=>{
-      setCountri(target.value)
+    const dispatch=  useDispatch()
+   const valueSearch= useSelector(state=> state.valorSearch)
+    const handleChange=({target})=>{
+      
+      dispatch(getAllSearch(target.value)) 
     }
-    const handleSudme=(e)=>{
+    const   handleSudme=(e)=>{
       e.preventDefault();
      
     }
-   
+    
      return(
         <form onSubmit={handleSudme}>
-            <input
-              type="text"
-              placeholder="Pais..."
-              value={countri}
-              onChange={handleClick}
-            />
+       
+           <input
+             type="text"
+             placeholder="Pais..."
+             value={valueSearch}
+             onChange={handleChange}
+           />
+            {/* <button onclick={handleChange}>buscar</button> */}
 
-            <Route path="/countri"><Home nombre={countri}/></Route>
+           {/* <Route path="/countri/search" render={() =><Countris name={countri}/>} /> */}
           </form>
      )
 }
